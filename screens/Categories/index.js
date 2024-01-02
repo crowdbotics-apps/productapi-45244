@@ -5,9 +5,11 @@ const Categories = ({
   navigation
 }) => {
   const categories = ["smartphones", "laptops", "fragrances", "skincare", "groceries", "home-decoration", "furniture", "tops", "womens-dresses", "womens-shoes", "mens-shirts", "mens-shoes", "mens-watches", "womens-watches", "womens-bags", "womens-jewellery", "sunglasses", "automotive", "motorcycle", "lighting"];
-  return <SafeAreaView style={styles.safeArea}>
-      <ScrollView contentContainerStyle={styles.scrollView}>
-        {categories.map((category, index) => <TouchableOpacity key={index} style={styles.listItem} onPress={() => navigation.navigate("Welcome")}>
+  return <SafeAreaView style={styles.container}>
+      <ScrollView>
+        {categories.map((category, index) => <TouchableOpacity key={index} style={styles.listItem} onPress={() => navigation.navigate("Category", {
+        category
+      })}>
             <Text style={styles.listItemText}>{category}</Text>
           </TouchableOpacity>)}
       </ScrollView>
@@ -15,18 +17,16 @@ const Categories = ({
 };
 
 const styles = StyleSheet.create({
-  safeArea: {
+  container: {
     flex: 1,
-    backgroundColor: "#f0f0gf"
-  },
-  scrollView: {
-    padding: 10
+    backgroundColor: "#f0f0f0"
   },
   listItem: {
     backgroundColor: "#fff",
-    padding: 15,
-    marginBottom: 10,
-    borderRadius: 15
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+    borderRadius: 10
   },
   listItemText: {
     fontSize: 18,
