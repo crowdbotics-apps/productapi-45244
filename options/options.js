@@ -1,10 +1,11 @@
 export const globalOptions = {
-  name: "productapi-45244",
-  url: "https://productapi-45244.botics.co",
-  api: "https://productapi-45244.botics.co/api/v1",
-  screenOptions: {
-    headerShown: false
-  }
+  "name": "productapi-45244",
+  "url": "https://productapi-45244.botics.co",
+  "api": "https://productapi-45244.botics.co/api/v1",
+  "screenOptions": {
+    "headerShown": false
+  },
+  "initialRoute": "welcome"
 };
 export const modulesOptions = {
   "@modules/app-menu": {
