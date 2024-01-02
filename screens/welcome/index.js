@@ -1,64 +1,75 @@
-import React from "react"
-import {
-  View,
-  Image,
-  Text,
-  ScrollView,
-  SafeAreaView,
-  StyleSheet
-} from "react-native"
+import React, { useState, useEffect } from "react";
+import { SafeAreaView, View, Text, FlatList, Image, StyleSheet, TouchableOpacity } from "react-native";
 
-const WelcomeScreen = () => {
-  return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollView}>
-        <View style={styles.group} />
-        <View style={styles.group}>
-          <Image style={styles.logo} source={require("./logo.png")} />
-          <Text style={styles.text}>
-            Let's build something amazing together!
-          </Text>
-        </View>
-        <Text style={styles.footer}>Made with ❤️ by Crowdbotics</Text>
-      </ScrollView>
-    </SafeAreaView>
-  )
-}
+const ListScreen = ({
+  navigation
+}) => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    fetch("https://dummyjson.com/products").then(response => response.json()).then(json => setData(json)).catch(error => console.error(error));
+  }, []);
 
+  const renderItem = ({
+    item
+  }) => <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate("ProductDetails", {
+    item
+  })}>
+      <Image source={{
+      uri: item.thumbnail
+    }} style={styles.imageStyle} />
+      <View style={styles.textContainer}>
+        <Text style={styles.titleStyle}>{item.title}</Text>
+        <Text style={styles.descriptionStyle}>{item.description}</Text>
+        <Text style={styles.priceStyle}>${item.price}</Text>
+      </View>
+    </TouchableOpacity>;
+
+  return <SafeAreaView style={styles.container}>
+      <FlatList data={data} renderItem={renderItem} keyExtractor={item => item.id.toString()} />
+    </SafeAreaView>;
+};
+
+export default ListScreen;
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#F8F8FC",
-    height: "100%"
-  },
-  scrollView: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: 20
+    backgroundColor: "#F5F5F5"
   },
-  group: {
-    alignItems: "center"
+  itemContainer: {
+    flexDirection: "row",
+    padding: 10,
+    margin: 10,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 13,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5
   },
-  logo: {
-    height: 180,
-    width: 180,
-    padding: 40,
-    borderRadius: 30,
-    margin: 40
+  imageStyle: {
+    width: 70,
+    height: 70,
+    borderRadius: 10
   },
-  text: {
-    textAlign: "center",
-    fontSize: 28,
-    color: "#828AB0",
-    fontWeight: 700
+  textContainer: {
+    marginLeft: 10,
+    justifyContent: "space-between"
   },
-  footer: {
-    textAlign: "center",
-    fontSize: 18,
-    color: "#828AB0",
-    fontWeight: 700,
-    marginBottom: 20
+  titleStyle: {
+    fontSize: 16,
+    fontWeight: "bold"
+  },
+  descriptionStyle: {
+    fontSize: 12,
+    color: "#888888"
+  },
+  priceStyle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#000000"
   }
-})
-
-export default WelcomeScreen
+});
