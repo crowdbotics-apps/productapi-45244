@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { View, Text, TouchableHighlight } from "react-native";
 import { OptionsContext } from "@options";
+
 /**
  * Custom Button Component.
  * @param {Object} props - Component props.
@@ -10,22 +11,21 @@ import { OptionsContext } from "@options";
  * @param {React.ReactNode} props.children - Components to render inside the button.
  * @returns {React.ReactNode} - The custom button component.
  */
-
-const Button = ({
-  onPress,
-  disabled,
-  children,
-  clicked
-}) => {
+const Button = ({ onPress, disabled, children, clicked }) => {
   const options = useContext(OptionsContext);
-  const {
-    styles
-  } = options;
-  return <TouchableHighlight onPress={onPress} disabled={disabled} underlayColor="#DDDDDD">
+  const { styles } = options;
+
+  return (
+    <TouchableHighlight
+      onPress={onPress}
+      disabled={disabled}
+      underlayColor="#DDDDDD"
+    >
       <View style={!clicked ? styles.button : styles.clicked}>
         <Text style={styles.buttonText}>{children}</Text>
       </View>
-    </TouchableHighlight>;
+    </TouchableHighlight>
+  );
 };
 
 export default Button;
