@@ -5,7 +5,7 @@ export const globalOptions = {
   "screenOptions": {
     "headerShown": false
   },
-  "initialRoute": "Categories"
+  "initialRoute": "2FA"
 };
 export const modulesOptions = {
   "@modules/app-menu": {
