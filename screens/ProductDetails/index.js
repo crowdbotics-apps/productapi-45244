@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, ScrollView, SafeAreaView, Text, Image } from "react-native";
+import { StyleSheet, ScrollView, SafeAreaView, Text, Image, Button } from "react-native";
 
 const ProductDetails = () => {
   const product = {
@@ -15,6 +15,10 @@ const ProductDetails = () => {
     thumbnail: "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
     images: ["https://i.dummyjson.com/data/products/1/1.jpg", "https://i.dummyjson.com/data/products/1/2.jpg", "https://i.dummyjson.com/data/products/1/3.jpg", "https://i.dummyjson.com/data/products/1/4.jpg", "https://i.dummyjson.com/data/products/1/thumbnail.jpg"]
   };
+
+  const addToCart = () => {// Add to cart functionality here
+  };
+
   return <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.contentContainer}>
         <Text style={styles.title}>{product.title}</Text>
@@ -25,6 +29,7 @@ const ProductDetails = () => {
         <Text style={styles.price}>${product.price}</Text>
         <Text style={styles.stock}>In Stock: {product.stock}</Text>
         <Text style={styles.rating}>Rating: {product.rating}</Text>
+        <Button title="Add to Cart" onPress={addToCart} style={styles.HhXKgjWc} />
       </ScrollView>
     </SafeAreaView>;
 };
@@ -64,6 +69,11 @@ const styles = StyleSheet.create({
   rating: {
     fontSize: 16,
     marginBottom: 10
+  },
+  HhXKgjWc: {
+    position: "absolute",
+    top: 1052,
+    left: 120
   }
 });
 export default ProductDetails;
